@@ -139,8 +139,7 @@ class DropboxClient
         oauth_sig = oauth_fake_req.to_hash['authorization']
 
         req = Net::HTTP::Post::Multipart.new(url.path, {
-            "file" => UploadIO.convert!(file_obj, 
-                        "application/octet-stream", name, name),
+            "file" => UploadIO.new(file_obj, "application/octet-stream", name),
         })
         req['authorization'] = oauth_sig.join(", ")
 
